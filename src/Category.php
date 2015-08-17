@@ -61,5 +61,13 @@
             }
             return $found_category;
         }
+
+        // static function findByName($search_name)
+        // {
+        //     $query = "SELECT * FROM categories WHERE name = '{$search_name}' LIMIT 1";
+        //     $result = $GLOBALS['DB']->query($query);
+        //     $row = $result->fetch_row();
+        //     return $row;
+        // }
     }
 ?>

@@ -111,6 +111,23 @@
             //Assert
             $this->assertEquals($test_Category, $result);
         }
+
+        // function test_findByName()
+        // {
+        //     //Arrange
+        //     $name = "Wash the dog";
+        //     $name2 = "Home stuff";
+        //     $test_Category = new Category($name);
+        //     $test_Category->save();
+        //     $test_Category2 = new Category($name2);
+        //     $test_Category2->save();
+        //
+        //     //Act
+        //     $result = Category::findByName($name);
+        //
+        //     //Assert
+        //     $this->assertEquals($test_Category, $result);
+        // }
     }
 
 ?>
