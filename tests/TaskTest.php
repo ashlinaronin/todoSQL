@@ -26,6 +26,7 @@
             //Arrange
             $description = "Wash the dog";
             $test_task = new Task($description);
+            $id = $test_task->getId();
 
             //Act
             $test_task->save();
@@ -70,7 +71,19 @@
             $this->assertEquals([], $result);
         }
 
+        function test_getId()
+        {
+            //Arrange
+            $description = "Wash the dog";
+            $id = 1;
+            $test_task = new Task($description, $id);
 
+            //Act
+            $result = $test_task->getId();
+
+            //Assert
+            $this->assertEquals(1, $result);
+        }
     }
 
 
