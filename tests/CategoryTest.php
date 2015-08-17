@@ -14,7 +14,7 @@
 
     class CategoryTest extends PHPUnit_Framework_TestCase
     {
-        protected function tearDowm()
+        protected function tearDown()
         {
             Category::deleteAll();
         }

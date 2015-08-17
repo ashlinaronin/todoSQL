@@ -27,13 +27,39 @@
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO categories (name) VALUES ('{this->getName()}')");
-            $result_id = $GLOBALS['DB']->lastInsertId();
-            $this->setId($result_id);
+            $GLOBALS['DB']->exec("INSERT INTO categories (name) VALUES ('{$this->getName()}');");
+            $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
-        //
+        static function getAll()
+        {
+            $returned_categories = $GLOBALS['DB']->query("SELECT * FROM categories;");
+            $categories = array();
+            foreach ($returned_categories as $category) {
+                $name = $category['name'];
+                $id = $category['id'];
+                $new_category = new Category($name, $id);
+                array_push($categories, $new_category);
+            }
+            return $categories;
+        }
 
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM categories;");
+        }
 
+        static function find($search_id)
+        {
+            $found_category = null;
+            $categories = Category::getAll();
+            foreach ($categories as $category) {
+                $category_id = $category->getId();
+                if ($category_id == $search_id) {
+                    $found_category = $category;
+                }
+            }
+            return $found_category;
+        }
     }
 ?>
