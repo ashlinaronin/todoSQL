@@ -51,7 +51,7 @@ class Task
         $statement = $GLOBALS['DB']->exec("INSERT INTO tasks (description, category_id, due_date) VALUES (
             '{$this->getDescription()}',
             {$this->getCategoryId()},
-            {$this->getDueDate()}
+            '{$this->getDueDate()}'
 
         );");
         $this->id = $GLOBALS['DB']->lastInsertId();
