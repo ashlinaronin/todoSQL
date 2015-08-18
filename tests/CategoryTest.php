@@ -6,6 +6,7 @@
     */
 
     require_once "src/Category.php";
+    require_once "src/Task.php";
 
     $server = 'mysql:host=localhost;dbname=to_do_test';
     $username = 'root';
@@ -112,22 +113,30 @@
             $this->assertEquals($test_Category, $result);
         }
 
-        // function test_findByName()
-        // {
-        //     //Arrange
-        //     $name = "Wash the dog";
-        //     $name2 = "Home stuff";
-        //     $test_Category = new Category($name);
-        //     $test_Category->save();
-        //     $test_Category2 = new Category($name2);
-        //     $test_Category2->save();
-        //
-        //     //Act
-        //     $result = Category::findByName($name);
-        //
-        //     //Assert
-        //     $this->assertEquals($test_Category, $result);
-        // }
+        function testGetTasks()
+        {
+            //Arrange
+            $name = "work stuff";
+            $id = null;
+            $test_category = new Category($name, $id);
+            $test_category->save();
+
+            $test_category_id = $test_category->getId();
+
+            $description = "Email client";
+            $test_task = new Task($description, $id, $test_category_id);
+            $test_task->save();
+
+            $description2 = "Meet with boss";
+            $test_task2 = new Task($description2, $id, $test_category_id);
+            $test_task2->save();
+
+            //Act
+            $result = $test_category->getTasks();
+
+            //Assert
+            $this->assertEquals([$test_task, $test_task2], $result);
+        }
     }
 
 ?>

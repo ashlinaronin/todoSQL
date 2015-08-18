@@ -31,6 +31,20 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
+        function getTasks()
+        {
+            $tasks = Array();
+            $returned_tasks = $GLOBALS['DB']->query("SELECT * FROM tasks WHERE category_id = {$this->getId()};");
+            foreach ($returned_tasks as $task) {
+                $description = $task['description'];
+                $id = $task['id'];
+                $category_id = $task['category_id'];
+                $new_task = new Task($description, $id, $category_id);
+                array_push($tasks, $new_task);
+            }
+            return $tasks;
+        }
+
         static function getAll()
         {
             $returned_categories = $GLOBALS['DB']->query("SELECT * FROM categories;");
@@ -62,12 +76,5 @@
             return $found_category;
         }
 
-        // static function findByName($search_name)
-        // {
-        //     $query = "SELECT * FROM categories WHERE name = '{$search_name}' LIMIT 1";
-        //     $result = $GLOBALS['DB']->query($query);
-        //     $row = $result->fetch_row();
-        //     return $row;
-        // }
     }
 ?>
