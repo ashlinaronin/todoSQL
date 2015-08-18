@@ -20,17 +20,11 @@
         ));
     });
 
-
-
-    // We have get and post versions of the tasks route to handle form input and display simultaneously
-    $app->get("/tasks", function() use ($app) {
-        return $app['twig']->render('tasks.html.twig', array('tasks' => Task::getAll()));
-    });
-
     $app->post("/tasks", function() use ($app) {
         $description = $_POST['description'];
         $category_id = $_POST['category_id'];
-        $task = new Task($description, $id = null, $category_id);
+        $due_date =$_POST['due_date'];
+        $task = new Task($description, $id = null, $category_id, $due_date);
         $task->save();
         $category = Category::find($category_id);
         return $app['twig']->render('category.html.twig', array(
@@ -38,12 +32,6 @@
             'tasks' => $category->getTasks()
         ));
     });
-
-
-    // // Get and post routes for categories
-    // $app->get("/categories", function() use ($app) {
-    //     return $app['twig']->render('categories.html.twig', array('categories' => Category::getAll()));
-    // });
 
     $app->get("/categories/{id}", function($id) use ($app) {
         $category = Category::find($id);
