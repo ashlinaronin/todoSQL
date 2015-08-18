@@ -14,6 +14,8 @@
         'twig.path' => __DIR__.'/../views'
     ));
 
+    $app['twig']->getExtension('core')->setTimezone('America/Los_Angeles');
+
     $app->get("/", function() use ($app) {
         return $app['twig']->render('index.html.twig', array(
             'categories' => Category::getAll()
