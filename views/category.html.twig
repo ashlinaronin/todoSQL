@@ -28,9 +28,12 @@
                     <label for='due_date'>Due By:</label>
                     <input id='due_date' name='due_date' type='date'>
                 </div>
-
-
-                <button type='submit'>Add task</button>
+                <button type='submit' class="btn btn-success">Add task</button>
+            </form>
+            <form action='/delete_tasks' method='post'>
+                <div class="form-group">
+                    <button type='submit' class='btn btn-danger'>Delete Tasks</button>
+                </div>
             </form>
             <p><a href='/'>Home</a></p>
         </div>
