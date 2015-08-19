@@ -8,7 +8,7 @@
     require_once "src/Category.php";
     require_once "src/Task.php";
 
-    $server = 'mysql:host=localhost;dbname=to_do_test';
+    $server = 'mysql:host=localhost:3306;dbname=to_do_test';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -156,6 +156,48 @@
 
             //Assert
             $this->assertEquals("Home stuff", $test_category->getName());
+        }
+
+        function testDelete()
+        {
+            //Arrange
+            $name = "Work stuff";
+            $id = null;
+            $test_category = new Category($name, $id);
+            $test_category->save();
+
+            $name2 = "Home stuff";
+            $test_category2 = new Category($name2, $id);
+            $test_category2->save();
+
+
+            //Act
+            $test_category->delete();
+
+            //Assert
+            $this->assertEquals([$test_category2], Category::getAll());
+        }
+
+        function testDeleteCategoryTasks()
+        {
+            //Arrange
+            $name = "Work stuff";
+            $id = null;
+            $test_category = new Category($name, $id);
+            $test_category->save();
+
+            $description = "Build website";
+            $category_id = $test_category->getId();
+            $due_date = "2014-05-03";
+            $test_task = new task($description, $id, $category_id, $due_date);
+            $test_task->save();
+
+
+            //Act
+            $test_category->delete();
+
+            //Assert
+            $this->assertEquals([], Task::getAll());
         }
     }
 
