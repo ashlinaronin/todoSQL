@@ -207,6 +207,51 @@
             $this->assertEquals([$task2], Task::getAll());
         }
 
+        function test_addCategory()
+        {
+            //Arrange
+            $name = "Christmas Things";
+            $id = 1;
+            $test_category = new Category($name, $id);
+            $test_category->save();
+
+            $description = "Decorate the tree";
+            $id2 = 2;
+            $test_task = new Task($description, $id2);
+            $test_task->save();
+
+            //Act
+            $test_task->addCategory($test_category);
+
+            //Assert
+            $this->assertEquals($test_task->getCategories(), [$test_category]);
+        }
+
+        function test_getCategories()
+        {
+            //Arrange
+            $name = "Halloween Stuff";
+            $id = 1;
+            $test_category = new Category($name, $id);
+            $test_category->save();
+
+            $name2 = "Carve the pumpkin";
+            $id2 = 2;
+            $test_category2 = new Category($name2, $id2);
+            $test_category2->save();
+
+            $description = "Scare trick or treaters";
+            $id3 = 3;
+            $test_task = new Task($description, $id3);
+            $test_task->save();
+
+            //Act
+            $test_task->addCategory($test_category);
+            $test_task->addCategory($test_category2);
+
+            //Assert
+            $this->assertEquals($test_task->getCategories(), [$test_category, $test_category2]);
+        }
     }
 
 
