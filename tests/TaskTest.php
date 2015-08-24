@@ -57,15 +57,14 @@
             //Arrange
             $description = "Wash the dog";
             $due_date = "2015-09-16";
-            $id = 1;
-            $task = new Task($description, $due_date, $id);
+            $task = new Task($description, $due_date);
             $task->save();
 
             //Act
             $result = $task->getId();
 
             //Assert
-            $this->assertEquals(1, $result);
+            $this->assertEquals(true, is_numeric($result));
         }
 
         function test_save()
